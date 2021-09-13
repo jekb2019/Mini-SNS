@@ -26,4 +26,9 @@
   text-transform: uppercase;
   letter-spacing: 3px;
   margin-left: 5px;
+  transition: letter-spacing 0.2s;
+}
+
+.button:hover {
+  letter-spacing: 0;
 }

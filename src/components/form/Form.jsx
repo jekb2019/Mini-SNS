@@ -11,6 +11,7 @@ const Form = ({ addPost }) => {
   const onSubmit = async () => {
     if (content !== '') {
       await addPost(content);
+      setContent('');
     }
   };
 
@@ -21,6 +22,7 @@ const Form = ({ addPost }) => {
         placeholder="Lemme know smth 🥸"
         type="text"
         onChange={onChange}
+        value={content}
       />
       <button className={styles.button} onClick={onSubmit}>
         Post

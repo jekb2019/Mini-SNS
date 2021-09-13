@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 function App({ postService }) {
   const [posts, setPosts] = useState([]);
+  // TODO(Jason): Implement user authentication
   const [user, setuser] = useState('Jason');
 
   useEffect(() => {
@@ -26,7 +27,7 @@ function App({ postService }) {
 
   const addPost = async (content) => {
     const post = await postService.addPost(user, content);
-    setPosts((prevPosts) => [post, ...posts]);
+    setPosts([post, ...posts]);
   };
 
   return (

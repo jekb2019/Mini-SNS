@@ -1,11 +1,13 @@
 import React from 'react';
 import styles from './Post.module.css';
 
-const Post = (props) => (
+const Post = ({ id, content, createdBy, onDelete }) => (
   <li className={styles.card}>
-    <p className={styles.content}>POST</p>
-    <p className={styles.createdBy}>Created by: user1</p>
-    <button className={styles.button}>Delete</button>
+    <p className={styles.content}>{content}</p>
+    <p className={styles.createdBy}>Created by: {createdBy}</p>
+    <button className={styles.button} onClick={() => onDelete(id)}>
+      Delete
+    </button>
   </li>
 );
 

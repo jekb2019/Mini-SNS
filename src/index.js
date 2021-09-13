@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import PostService from './service/postService/postService';
+
+const postService = new PostService();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App postService={postService} />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Form.module.css';
 
-const Form = (props) => (
-  <div className={styles.wrapper}>
-    <input
-      className={styles.input}
-      placeholder="Lemme know smth 🥸"
-      type="text"
-    />
-    <button className={styles.button}>Post</button>
-  </div>
-);
+const Form = ({ addPost }) => {
+  const [content, setContent] = useState('');
+
+  const onChange = (e) => {
+    setContent(e.target.value);
+  };
+
+  const onSubmit = async () => {
+    if (content !== '') {
+      await addPost(content);
+    }
+  };
+
+  return (
+    <div className={styles.wrapper}>
+      <input
+        className={styles.input}
+        placeholder="Lemme know smth 🥸"
+        type="text"
+        onChange={onChange}
+      />
+      <button className={styles.button} onClick={onSubmit}>
+        Post
+      </button>
+    </div>
+  );
+};
 
 export default Form;

@@ -1,0 +1,40 @@
+.card {
+  border: 1px solid white;
+  height: 100px;
+  margin: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 30px;
+}
+
+.content {
+  color: white;
+  font-size: 20px;
+}
+
+.createdBy {
+  color: rgb(194, 191, 191);
+  font-size: 13px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.button {
+  position: absolute;
+  right: 30px;
+  height: 30px;
+  width: 70px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.button:focus {
+  outline: none;
+}

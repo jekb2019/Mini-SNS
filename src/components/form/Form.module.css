@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.input {
+  height: 40px;
+  width: 400px;
+  font-size: 20px;
+  padding: 0 5px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.button {
+  height: 40px;
+  width: 80px;
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-left: 5px;
+}

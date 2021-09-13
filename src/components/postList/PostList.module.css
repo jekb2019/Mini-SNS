@@ -1,4 +1,5 @@
 .list {
   height: 100%;
   overflow-y: scroll;
+  scrollbar-color: red yellow;
 }

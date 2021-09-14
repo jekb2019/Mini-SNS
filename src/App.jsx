@@ -3,7 +3,6 @@ import Header from './components/header/Header';
 import Form from './components/form/Form';
 import PostList from './components/postList/PostList';
 import { useEffect, useState } from 'react';
-// import Modal from './components/modal/Modal';
 import Modal from './components/modal/Modal';
 
 function App({ postService }) {
@@ -12,7 +11,12 @@ function App({ postService }) {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(null);
 
+  // Enums
+  const MODAL_TYPE_LOG_IN = 'LOG_IN';
+  const MODAL_TYPE_SIGN_UP = 'SIGN_UP';
+
   useEffect(() => {
+    // Load posts from server
     postService.getPosts().then((posts) => setPosts(posts));
   }, []);
 
@@ -27,18 +31,22 @@ function App({ postService }) {
   };
 
   const deletePost = async (id) => {
+    // Delete post from server
     try {
       await postService.deletePost(id);
     } catch (e) {
-      throw new Error('Unable to delete post');
+      throw new Error(`Unable to delete post with id [${id}]`);
     }
+    // Delete post in the component state (UI)
     setPosts((prevPosts) => {
       return prevPosts.filter((post) => post.id !== id);
     });
   };
 
   const addPost = async (content) => {
+    // Add post to server
     const post = await postService.addPost(user, content);
+    // Add post to UI
     setPosts([post, ...posts]);
   };
 
@@ -56,6 +64,7 @@ function App({ postService }) {
         <div className={styles.modalWrapper}>
           <Modal
             type={modalType}
+            modalTypes={{ MODAL_TYPE_LOG_IN, MODAL_TYPE_SIGN_UP }}
             closeModal={closeModal}
             openModalType={openModalType}
           />

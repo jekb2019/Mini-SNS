@@ -17,9 +17,6 @@ const PostList = ({ posts, onDelete }) => {
           />
         );
       })}
-      {/* <Post />
-    <Post />
-    <Post /> */}
     </ul>
   );
 };

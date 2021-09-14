@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ModalTypeContext } from '../../context/ModalTypeContext';
 import styles from './Modal.module.css';
 
-const Modal = ({ type, modalTypes, closeModal, openModalType }) => {
-  const { MODAL_TYPE_LOG_IN, MODAL_TYPE_SIGN_UP } = modalTypes;
+const Modal = ({ closeModal, openModalType }) => {
+  const { modalType, setModalType } = useContext(ModalTypeContext);
+  // const { MODAL_TYPE_LOG_IN, MODAL_TYPE_SIGN_UP } = modalTypes;
 
   const switchModalType = () => {
-    if (type === MODAL_TYPE_SIGN_UP) {
-      openModalType(MODAL_TYPE_LOG_IN);
+    if (modalType === 'login') {
+      openModalType('signup');
     } else {
-      openModalType(MODAL_TYPE_SIGN_UP);
+      openModalType('login');
     }
   };
   return (
@@ -18,13 +20,13 @@ const Modal = ({ type, modalTypes, closeModal, openModalType }) => {
       </p>
       <form className={styles.form}>
         <h1 className={styles.title}>
-          {type === MODAL_TYPE_SIGN_UP ? 'Sign Up' : 'Log In'}
+          {modalType === 'signup' ? 'Sign Up' : 'Log In'}
         </h1>
         <div className={styles.inputSection}>
           <label className={styles.label}>Username</label>
           <input type="text" id="username" className={styles.input} required />
         </div>
-        {type === MODAL_TYPE_SIGN_UP && (
+        {modalType === 'signup' && (
           <div className={styles.inputSection}>
             <label className={styles.label}>Email</label>
             <input type="text" id="email" className={styles.input} required />
@@ -37,7 +39,7 @@ const Modal = ({ type, modalTypes, closeModal, openModalType }) => {
         <button className={styles.button}>Go</button>
       </form>
       <p className={styles.link} onClick={switchModalType}>
-        {type === MODAL_TYPE_SIGN_UP ? 'Log In' : 'Sign Up'}
+        {modalType === 'signup' ? 'Log In' : 'Sign Up'}
       </p>
     </section>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from '../Post/Post';
+import Post from '../post/Post';
 import styles from './PostList.module.css';
 
 const PostList = ({ posts, onDelete }) => {

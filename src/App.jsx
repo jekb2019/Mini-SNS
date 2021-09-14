@@ -4,6 +4,13 @@ import Form from './components/form/Form';
 import PostList from './components/postList/PostList';
 import { useEffect, useState } from 'react';
 import Modal from './components/modal/Modal';
+import { ModalTypeContext } from './context/ModalTypeContext';
+
+/**
+ * Is Modal Design good enough?
+ * What is Higher order component? Should I include this?
+ * Add Prop types
+ */
 
 function App({ postService }) {
   const [posts, setPosts] = useState([]);
@@ -11,9 +18,9 @@ function App({ postService }) {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(null);
 
-  // Enums
-  const MODAL_TYPE_LOG_IN = 'LOG_IN';
-  const MODAL_TYPE_SIGN_UP = 'SIGN_UP';
+  // // Enums
+  // const MODAL_TYPE_LOG_IN = 'LOG_IN';
+  // const MODAL_TYPE_SIGN_UP = 'SIGN_UP';
 
   useEffect(() => {
     // Load posts from server
@@ -54,7 +61,7 @@ function App({ postService }) {
     <div className={styles.app}>
       <Header
         showLoginModal={() => {
-          openModalType('LOG_IN');
+          openModalType('login');
         }}
         user={user}
       />
@@ -62,12 +69,14 @@ function App({ postService }) {
       <PostList posts={posts} onDelete={deletePost} />
       {showModal && (
         <div className={styles.modalWrapper}>
-          <Modal
-            type={modalType}
-            modalTypes={{ MODAL_TYPE_LOG_IN, MODAL_TYPE_SIGN_UP }}
-            closeModal={closeModal}
-            openModalType={openModalType}
-          />
+          <ModalTypeContext.Provider value={{ modalType, setModalType }}>
+            <Modal
+              // type={modalType}
+              // modalTypes={{ MODAL_TYPE_LOG_IN, MODAL_TYPE_SIGN_UP }}
+              closeModal={closeModal}
+              openModalType={openModalType}
+            />
+          </ModalTypeContext.Provider>
         </div>
       )}
     </div>

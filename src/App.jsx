@@ -18,10 +18,6 @@ function App({ postService }) {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(null);
 
-  // // Enums
-  // const MODAL_TYPE_LOG_IN = 'LOG_IN';
-  // const MODAL_TYPE_SIGN_UP = 'SIGN_UP';
-
   useEffect(() => {
     // Load posts from server
     postService.getPosts().then((posts) => setPosts(posts));
@@ -68,16 +64,9 @@ function App({ postService }) {
       <Form addPost={addPost} />
       <PostList posts={posts} onDelete={deletePost} />
       {showModal && (
-        <div className={styles.modalWrapper}>
-          <ModalTypeContext.Provider value={{ modalType, setModalType }}>
-            <Modal
-              // type={modalType}
-              // modalTypes={{ MODAL_TYPE_LOG_IN, MODAL_TYPE_SIGN_UP }}
-              closeModal={closeModal}
-              openModalType={openModalType}
-            />
-          </ModalTypeContext.Provider>
-        </div>
+        <ModalTypeContext.Provider value={modalType}>
+          <Modal closeModal={closeModal} openModalType={openModalType} />
+        </ModalTypeContext.Provider>
       )}
     </div>
   );

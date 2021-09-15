@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from '../post/Post';
 import styles from './PostList.module.css';
+import PropTypes from 'prop-types';
 
 const PostList = ({ posts, onDelete }) => {
   return (
@@ -19,6 +20,11 @@ const PostList = ({ posts, onDelete }) => {
       })}
     </ul>
   );
+};
+
+PostList.propTypes = {
+  posts: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default PostList;

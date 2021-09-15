@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Post.module.css';
+import PropTypes from 'prop-types';
 
 const Post = ({ id, content, createdBy, onDelete }) => (
   <li className={styles.card}>
@@ -10,5 +11,12 @@ const Post = ({ id, content, createdBy, onDelete }) => (
     </button>
   </li>
 );
+
+Post.propTypes = {
+  id: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  createdBy: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default Post;

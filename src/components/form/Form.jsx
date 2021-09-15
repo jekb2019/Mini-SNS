@@ -40,7 +40,7 @@ const Form = ({ addPost }) => {
 };
 
 Form.propTypes = {
-  addPost: PropTypes.func,
+  addPost: PropTypes.func.isRequired,
 };
 
 export default Form;

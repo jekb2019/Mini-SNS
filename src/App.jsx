@@ -7,11 +7,11 @@ import Modal from './components/modal/Modal';
 import { ModalTypeContext } from './context/ModalTypeContext';
 
 /**
- * Is Modal Design good enough?
- * What is Higher order component? Should I include this?
- * Add Prop types
+ * Data in this component:
+ *  - current modal type / visibility
+ *  - logged in user info
+ *  - posts
  */
-
 function App({ postService }) {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
@@ -21,7 +21,7 @@ function App({ postService }) {
   useEffect(() => {
     // Load posts from server
     postService.getPosts().then((posts) => setPosts(posts));
-  }, []);
+  }, [postService]);
 
   const closeModal = () => {
     setShowModal(false);

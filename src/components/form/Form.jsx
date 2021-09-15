@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import useInput from '../../util/useInput';
 import styles from './Form.module.css';
 

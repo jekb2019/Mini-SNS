@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Header.module.css';
+import PropTypes from 'prop-types';
 
 const Header = ({ showLoginModal, user }) => (
   <header className={styles.wrapper}>
@@ -13,5 +14,14 @@ const Header = ({ showLoginModal, user }) => (
     )}
   </header>
 );
+
+Header.propTypes = {
+  showLoginModal: PropTypes.func.isRequired,
+  user: PropTypes.object,
+};
+
+Header.defaultProps = {
+  user: null,
+};
 
 export default Header;

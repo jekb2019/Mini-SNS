@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import useInput from '../../util/useInput';
 import styles from './Form.module.css';
+import PropTypes from 'prop-types';
 
 const Form = ({ addPost }) => {
   const inputRef = useRef();
@@ -36,6 +37,10 @@ const Form = ({ addPost }) => {
       </button>
     </div>
   );
+};
+
+Form.propTypes = {
+  addPost: PropTypes.func,
 };
 
 export default Form;

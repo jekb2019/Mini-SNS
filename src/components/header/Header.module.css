@@ -14,7 +14,14 @@
   letter-spacing: 5px;
 }
 
+.greeting {
+  color: white;
+  position: absolute;
+  right: 120px;
+}
+
 .button {
+  z-index: 1;
   width: 70px;
   height: 30px;
   border: 2px solid white;

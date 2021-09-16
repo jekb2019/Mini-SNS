@@ -5,7 +5,7 @@ import SignupForm from '../modalForms/signupForm/SignupForm';
 import styles from './Modal.module.css';
 import PropTypes from 'prop-types';
 
-const Modal = ({ closeModal, openModalType }) => {
+const Modal = ({ signup, closeModal, openModalType }) => {
   const modalType = useContext(ModalTypeContext);
 
   const switchModalType = () => {
@@ -22,7 +22,11 @@ const Modal = ({ closeModal, openModalType }) => {
         <p onClick={closeModal} className={styles.close}>
           X
         </p>
-        {modalType === 'signup' ? <SignupForm /> : <LoginForm />}
+        {modalType === 'signup' ? (
+          <SignupForm signup={signup} />
+        ) : (
+          <LoginForm />
+        )}
         <p className={styles.link} onClick={switchModalType}>
           {modalType === 'signup' ? 'Log In' : 'Sign Up'}
         </p>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const Header = ({ showLoginModal, user }) => (
   <header className={styles.wrapper}>
     <h1 className={styles.title}>Mini SNS</h1>
+    {user && <p className={styles.greeting}>{`Hi ${user.username}`}</p>}
     {user ? (
       <button className={styles.button}>Log Out</button>
     ) : (

@@ -1,14 +1,19 @@
 import React from 'react';
 import '../../../common/styles/modalForm.css';
 import useInput from '../../../util/useInput';
-const SignupForm = (props) => {
+const SignupForm = ({ signup }) => {
   const [username, setUsernameByEvent, setUsernameByValue] = useInput('');
   const [email, setEmailByEvent, setEmailByValue] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signup(username, email, password);
+  };
+
   return (
     <div>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h1 className="title">Sign Up</h1>
         <div className="inputSection">
           <label className="label">Username</label>

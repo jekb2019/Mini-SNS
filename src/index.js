@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import PostService from './service/postService/postService';
+import UserService from './service/userService/userService';
 
 const postService = new PostService();
+const userService = new UserService();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App postService={postService} />
+    <App postService={postService} userService={userService} />
   </React.StrictMode>,
   document.getElementById('root')
 );

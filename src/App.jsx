@@ -5,6 +5,24 @@ import PostList from './components/postList/PostList';
 import { useEffect, useState } from 'react';
 import Modal from './components/modal/Modal';
 import { ModalTypeContext } from './context/ModalTypeContext';
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+
+async function signup(username, email, password) {
+  try {
+    const { user } = await Auth.signUp({
+      username,
+      password,
+      attributes: {
+        email,
+      },
+    });
+    console.log(user);
+  } catch (error) {
+    console.error('Error signing up: ' + error);
+  }
+}
 
 /**
  * Data in this component:
@@ -12,11 +30,19 @@ import { ModalTypeContext } from './context/ModalTypeContext';
  *  - logged in user info
  *  - posts
  */
-function App({ postService }) {
+function App({ postService, userService }) {
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('jason');
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState('Jason');
+  const [modalType, setModalType] = useState(null);
+
+  const signup = async (username, email, password) => {
+    try {
+      await userService.signup(username, email, password);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     // Load posts from server
@@ -65,7 +91,11 @@ function App({ postService }) {
       <PostList posts={posts} onDelete={deletePost} />
       {showModal && (
         <ModalTypeContext.Provider value={modalType}>
-          <Modal closeModal={closeModal} openModalType={openModalType} />
+          <Modal
+            signup={signup}
+            closeModal={closeModal}
+            openModalType={openModalType}
+          />
         </ModalTypeContext.Provider>
       )}
     </div>

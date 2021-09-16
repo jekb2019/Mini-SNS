@@ -2,13 +2,24 @@ import React from 'react';
 import '../../../common/styles/modalForm.css';
 import useInput from '../../../util/useInput';
 
-const LoginForm = (props) => {
+const LoginForm = ({ signin, closeModal }) => {
   const [username, setUsernameByEvent, setUsernameByValue] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signin(username, password)
+      .then(() => {
+        closeModal();
+      })
+      .catch((e) => {
+        alert('Failed to Log In. Please try again.');
+      });
+  };
+
   return (
     <div>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h1 className="title">Log In</h1>
         <div className="inputSection">
           <label className="label">Username</label>

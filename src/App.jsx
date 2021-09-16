@@ -9,21 +9,6 @@ import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
-async function signup(username, email, password) {
-  try {
-    const { user } = await Auth.signUp({
-      username,
-      password,
-      attributes: {
-        email,
-      },
-    });
-    console.log(user);
-  } catch (error) {
-    console.error('Error signing up: ' + error);
-  }
-}
-
 /**
  * Data in this component:
  *  - current modal type / visibility
@@ -32,13 +17,31 @@ async function signup(username, email, password) {
  */
 function App({ postService, userService }) {
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState('jason');
+  const [user, setUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(null);
 
   const signup = async (username, email, password) => {
     try {
       await userService.signup(username, email, password);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signin = async (username, password) => {
+    try {
+      const user = await userService.login(username, password);
+      setUser(user);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const signout = async () => {
+    try {
+      userService.signout();
+      setUser(null);
     } catch (error) {
       console.error(error);
     }
@@ -86,6 +89,7 @@ function App({ postService, userService }) {
           openModalType('login');
         }}
         user={user}
+        signout={signout}
       />
       <Form addPost={addPost} />
       <PostList posts={posts} onDelete={deletePost} />
@@ -93,6 +97,7 @@ function App({ postService, userService }) {
         <ModalTypeContext.Provider value={modalType}>
           <Modal
             signup={signup}
+            signin={signin}
             closeModal={closeModal}
             openModalType={openModalType}
           />

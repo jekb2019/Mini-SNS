@@ -37,7 +37,7 @@ class PostService {
   async addPost(author, content) {
     console.log(author, content);
     const post = {
-      id: Date.now(),
+      id: Date.now().toString(),
       content,
       author,
     };

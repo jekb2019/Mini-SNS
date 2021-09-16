@@ -3,6 +3,7 @@ import { ModalTypeContext } from '../../context/ModalTypeContext';
 import LoginForm from '../modalForms/loginForm/LoginForm';
 import SignupForm from '../modalForms/signupForm/SignupForm';
 import styles from './Modal.module.css';
+import PropTypes from 'prop-types';
 
 const Modal = ({ closeModal, openModalType }) => {
   const modalType = useContext(ModalTypeContext);
@@ -14,6 +15,7 @@ const Modal = ({ closeModal, openModalType }) => {
       openModalType('login');
     }
   };
+
   return (
     <div className={styles.wrapper}>
       <section className={styles.modal}>
@@ -27,6 +29,11 @@ const Modal = ({ closeModal, openModalType }) => {
       </section>
     </div>
   );
+};
+
+Modal.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  openModalType: PropTypes.func.isRequired,
 };
 
 export default Modal;

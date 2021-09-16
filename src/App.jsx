@@ -16,7 +16,7 @@ function App({ postService }) {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(null);
+  const [modalType, setModalType] = useState('Jason');
 
   useEffect(() => {
     // Load posts from server

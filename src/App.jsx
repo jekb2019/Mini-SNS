@@ -50,6 +50,17 @@ function App({ postService, userService }) {
   const signup = async (username, email, password) => {
     try {
       await userService.signup(username, email, password);
+      await verifyUser(username);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const verifyUser = async (username) => {
+    const code = prompt('Verification code (Sent to your email)');
+    try {
+      await userService.confirmSignup(username, code);
+      alert('Successfully signed up! Welcome to MINI SNS!');
     } catch (error) {
       throw error;
     }

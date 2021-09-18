@@ -20,14 +20,38 @@ export default class UserService {
    */
   async signup(username, email, password) {
     try {
-      const { user } = await Auth.signUp({
+      const { user, userSub } = await Auth.signUp({
         username,
         password,
         attributes: {
           email,
         },
       });
+      console.log(userSub);
       return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+   * Confirm Signup
+   */
+
+  async confirmSignup(username, code) {
+    try {
+      await Auth.confirmSignUp(username, code);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+   * Resend confirmation code
+   */
+  async resendConfirmationCode(username) {
+    try {
+      await Auth.resendSignUp(username);
     } catch (error) {
       throw error;
     }

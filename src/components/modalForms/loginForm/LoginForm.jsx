@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import '../../../common/styles/modalForm.css';
 import useInput from '../../../util/useInput';
 
@@ -13,6 +13,7 @@ const LoginForm = ({ signin, closeModal }) => {
         closeModal();
       })
       .catch((e) => {
+        setPasswordByValue('');
         alert('Failed to Log In. Please try again.');
       });
   };

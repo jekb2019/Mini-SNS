@@ -1,14 +1,23 @@
 import React from 'react';
 import '../../../common/styles/modalForm.css';
 import useInput from '../../../util/useInput';
-const SignupForm = ({ signup }) => {
+const SignupForm = ({ signup, closeModal }) => {
   const [username, setUsernameByEvent, setUsernameByValue] = useInput('');
   const [email, setEmailByEvent, setEmailByValue] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(username, email, password);
+    signup(username, email, password)
+      .then(() => {
+        closeModal();
+      })
+      .catch(() => {
+        setPasswordByValue('');
+        alert(
+          'Problem signing up: user already exists or password less than 8 characters.'
+        );
+      });
   };
 
   return (

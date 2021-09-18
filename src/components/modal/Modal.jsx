@@ -23,7 +23,7 @@ const Modal = ({ signup, signin, closeModal, openModalType }) => {
           X
         </p>
         {modalType === 'signup' ? (
-          <SignupForm signup={signup} />
+          <SignupForm signup={signup} closeModal={closeModal} />
         ) : (
           <LoginForm signin={signin} closeModal={closeModal} />
         )}

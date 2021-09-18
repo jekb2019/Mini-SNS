@@ -51,7 +51,7 @@ function App({ postService, userService }) {
     try {
       await userService.signup(username, email, password);
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
 
@@ -69,7 +69,7 @@ function App({ postService, userService }) {
       userService.signout();
       setUser(null);
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
 

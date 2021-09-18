@@ -5,7 +5,7 @@ import PostList from './components/postList/PostList';
 import { useEffect, useState } from 'react';
 import Modal from './components/modal/Modal';
 import { ModalTypeContext } from './context/ModalTypeContext';
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 Amplify.configure(awsconfig);
 
@@ -21,6 +21,32 @@ function App({ postService, userService }) {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(null);
 
+  useEffect(() => {
+    // Load posts from server
+    postService.getPosts().then((posts) => setPosts(posts));
+  }, [postService]);
+
+  useEffect(() => {
+    userService
+      .getCurrentUser()
+      .then((user) => {
+        if (user) {
+          setUser(filterCognitoUser(user));
+        } else {
+          setUser(null);
+        }
+      })
+      .catch(console.error);
+  }, [userService]);
+
+  const filterCognitoUser = (cognitoUser) => {
+    const {
+      username,
+      attributes: { email },
+    } = cognitoUser;
+    return { username, email };
+  };
+
   const signup = async (username, email, password) => {
     try {
       await userService.signup(username, email, password);
@@ -32,7 +58,7 @@ function App({ postService, userService }) {
   const signin = async (username, password) => {
     try {
       const user = await userService.login(username, password);
-      setUser(user);
+      setUser(filterCognitoUser(user));
     } catch (error) {
       throw error;
     }
@@ -46,11 +72,6 @@ function App({ postService, userService }) {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    // Load posts from server
-    postService.getPosts().then((posts) => setPosts(posts));
-  }, [postService]);
 
   const closeModal = () => {
     setShowModal(false);

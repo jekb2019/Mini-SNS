@@ -1,10 +1,23 @@
 import { Auth } from 'aws-amplify';
 
 export default class UserService {
-  constructor() {
-    this.username = null;
+  /**
+   * If user logged in, return current user info.
+   * If user NOT logged in, return null.
+   */
+  async getCurrentUser() {
+    let currentUser;
+    try {
+      currentUser = await Auth.currentAuthenticatedUser();
+    } catch (e) {
+      currentUser = null;
+    }
+    return currentUser;
   }
 
+  /**
+   * Sign up user to the system
+   */
   async signup(username, email, password) {
     try {
       const { user } = await Auth.signUp({
@@ -14,22 +27,27 @@ export default class UserService {
           email,
         },
       });
-      console.log(user);
+      return user;
     } catch (error) {
       throw error;
     }
   }
 
+  /**
+   * Log in user to the system
+   */
   async login(username, password) {
     try {
       const user = await Auth.signIn(username, password);
-      console.log(user);
-      return { username: user.username };
+      return user;
     } catch (error) {
       throw error;
     }
   }
 
+  /**
+   * Sign out user from the system
+   */
   async signout() {
     try {
       await Auth.signOut();

@@ -20,7 +20,7 @@ const Header = ({ showLoginModal, user, signout }) => (
 
 Header.propTypes = {
   showLoginModal: PropTypes.func.isRequired,
-  user: PropTypes.object,
+  user: PropTypes.object, // shape this
 };
 
 Header.defaultProps = {

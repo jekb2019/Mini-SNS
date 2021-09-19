@@ -7,6 +7,8 @@ import Modal from './components/modal/Modal';
 import { ModalTypeContext } from './context/ModalTypeContext';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
+import { filterCognitoUser, verifyUser } from './helpers/authHelper';
+
 Amplify.configure(awsconfig);
 
 /**
@@ -26,6 +28,9 @@ function App({ postService, userService }) {
     postService.getPosts().then((posts) => setPosts(posts));
   }, [postService]);
 
+  /**
+   * Get current user from AWS Cognito
+   */
   useEffect(() => {
     userService
       .getCurrentUser()
@@ -39,28 +44,16 @@ function App({ postService, userService }) {
       .catch(console.error);
   }, [userService]);
 
-  const filterCognitoUser = (cognitoUser) => {
-    const {
-      username,
-      attributes: { email },
-    } = cognitoUser;
-    return { username, email };
-  };
-
   const signup = async (username, email, password) => {
     try {
       await userService.signup(username, email, password);
-      await verifyUser(username);
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const verifyUser = async (username) => {
-    const code = prompt('Verification code (Sent to your email)');
-    try {
-      await userService.confirmSignup(username, code);
-      alert('Successfully signed up! Welcome to MINI SNS!');
+      const code = prompt('Enter verification code (Sent to your email)');
+      const isVerified = await verifyUser(userService, username, code);
+      if (isVerified) {
+        alert('Successfully signed up! Welcome to MINI SNS!');
+        return;
+      }
+      alert('Verification Failed');
     } catch (error) {
       throw error;
     }
@@ -109,7 +102,7 @@ function App({ postService, userService }) {
 
   const addPost = async (content) => {
     // Add post to server
-    const post = await postService.addPost(user, content);
+    const post = await postService.addPost(user.username, content);
     // Add post to UI
     setPosts([post, ...posts]);
   };

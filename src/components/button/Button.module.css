@@ -6,6 +6,10 @@
   text-transform: uppercase;
 }
 
+.btn:focus {
+  outline: none;
+}
+
 /* Types */
 .shine {
   position: relative;

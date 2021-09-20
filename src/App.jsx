@@ -113,7 +113,7 @@ function App({ postService, userService }) {
         showLoginModal={() => {
           openModalType('login');
         }}
-        user={user}
+        user={user ? user.username : null}
         signout={signout}
       />
       <Form addPost={addPost} />

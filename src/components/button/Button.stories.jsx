@@ -1,18 +1,11 @@
 import React from 'react';
-import Background from '../storyUtil/background/Background';
 import Center from '../storyUtil/center/Center';
 import Button from './Button';
 
 export default {
   title: 'Controllers/Button',
   component: Button,
-  decorators: [
-    (story) => (
-      <Background backgroundColor="dark">
-        <Center>{story()}</Center>
-      </Background>
-    ),
-  ],
+  decorators: [(story) => <Center>{story()}</Center>],
 };
 
 const Template = (args) => <Button {...args} />;

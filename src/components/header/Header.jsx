@@ -27,8 +27,11 @@ const Header = ({ login, logout, username }) => (
 );
 
 Header.propTypes = {
+  // Run login procedure
   login: PropTypes.func.isRequired,
+  // Run logout procedure
   logout: PropTypes.func.isRequired,
+  // Username to display in header
   username: PropTypes.string,
 };
 

@@ -110,11 +110,11 @@ function App({ postService, userService }) {
   return (
     <div className={styles.app}>
       <Header
-        showLoginModal={() => {
+        login={() => {
           openModalType('login');
         }}
         user={user ? user.username : null}
-        signout={signout}
+        logout={signout}
       />
       <Form addPost={addPost} />
       <PostList posts={posts} onDelete={deletePost} />

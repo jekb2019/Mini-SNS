@@ -16,18 +16,19 @@ const displayButton = (label, onClick) => (
  * Header component does not have any business logic.
  * It is purely UI component
  */
-const Header = ({ showLoginModal, username, signout }) => (
+const Header = ({ login, logout, username }) => (
   <header className={styles.wrapper}>
     <h1 className={styles.title}>MINI SNS</h1>
     {username && <p className={styles.greeting}>{`Hi ${username}`}</p>}
     {username
-      ? displayButton('Log out', signout)
-      : displayButton('Log in', showLoginModal)}
+      ? displayButton('Log out', logout)
+      : displayButton('Log in', login)}
   </header>
 );
 
 Header.propTypes = {
-  showLoginModal: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
   username: PropTypes.string,
 };
 

@@ -1,10 +1,5 @@
-.wrapper {
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px;
-}
-
-.btnWrapper {
-  margin-left: 5px;
 }

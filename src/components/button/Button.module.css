@@ -1,0 +1,49 @@
+.btn {
+  font-size: 16px;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  text-transform: uppercase;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+/* Types */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+.shine::before {
+  content: '';
+  width: 20px;
+  height: 70px;
+  position: absolute;
+  background-color: white;
+  transform: rotateZ(30deg);
+  top: -10px;
+  left: -35px;
+  transition: transform 0.3s;
+}
+
+.shine:hover::before {
+  transform: translateX(140px) rotateZ(30deg);
+}
+
+.bounce {
+  transition: letter-spacing 0.2s;
+}
+
+.bounce:hover {
+  letter-spacing: 2px;
+}
+/* Sizes */
+.small {
+  width: 90px;
+  height: 30px;
+}
+.medium {
+  width: 100px;
+  height: 40px;
+}

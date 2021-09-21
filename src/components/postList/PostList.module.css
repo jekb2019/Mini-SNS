@@ -1,5 +1,10 @@
-.list {
+.wrapper {
   height: 100%;
+  position: relative;
   overflow-y: scroll;
   scrollbar-color: red yellow;
+}
+
+.list {
+  width: 100%;
 }

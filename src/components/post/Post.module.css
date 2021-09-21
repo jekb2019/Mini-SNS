@@ -22,24 +22,7 @@
   left: 10px;
 }
 
-.button {
+.btnWrapper {
   position: absolute;
   right: 30px;
-  height: 30px;
-  width: 70px;
-  background-color: transparent;
-  border: 1px solid white;
-  color: white;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: letter-spacing 0.2s;
-}
-
-.button:focus {
-  outline: none;
-}
-
-.button:hover {
-  letter-spacing: 0;
 }

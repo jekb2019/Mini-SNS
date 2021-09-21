@@ -1,25 +1,25 @@
 .card {
   border: 1px solid white;
-  height: 100px;
+  min-height: 100px;
   margin: 20px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 30px;
+  padding: 10px 30px;
 }
 
 .content {
   color: white;
   font-size: 20px;
+  max-width: 470px;
+  word-wrap: break-word;
 }
 
 .createdBy {
+  margin-top: 10px;
   color: rgb(175, 174, 174);
   font-size: 13px;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
 }
 
 .btnWrapper {

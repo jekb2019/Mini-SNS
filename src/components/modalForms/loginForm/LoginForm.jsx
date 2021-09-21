@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import '../../../common/styles/modalForm.css';
-import useInput from '../../../util/useInput';
+import useInput from '../../../hooks/useInput';
 
 const LoginForm = ({ signin, closeModal }) => {
   const [username, setUsernameByEvent, setUsernameByValue] = useInput('');

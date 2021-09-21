@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../common/styles/modalForm.css';
-import useInput from '../../../util/useInput';
+import useInput from '../../../hooks/useInput';
 const SignupForm = ({ signup, closeModal }) => {
   const [username, setUsernameByEvent, setUsernameByValue] = useInput('');
   const [email, setEmailByEvent, setEmailByValue] = useInput('');

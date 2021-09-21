@@ -13,7 +13,7 @@ Amplify.configure(awsconfig);
 
 /**
  * Data in this component:
- *  - current modal type / visibility
+ *  - current modal type & visibility
  *  - logged in user info
  *  - posts
  */

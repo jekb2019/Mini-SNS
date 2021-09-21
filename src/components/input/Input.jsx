@@ -2,9 +2,18 @@ import React from 'react';
 import styles from './Input.module.css';
 import PropTypes from 'prop-types';
 
-const Input = ({ placeholder, onPressEnter, value, onChange, inputRef }) => {
+const Input = ({
+  placeholder,
+  onPressEnter,
+  value,
+  onChange,
+  inputRef,
+  isRequired,
+  size,
+  type,
+}) => {
   const onKeyPress = (e) => {
-    if (e.code === 'Enter') {
+    if (e.code === 'Enter' && onPressEnter !== null) {
       onPressEnter(value);
     }
   };
@@ -12,12 +21,13 @@ const Input = ({ placeholder, onPressEnter, value, onChange, inputRef }) => {
   return (
     <input
       ref={inputRef}
-      className={styles.input}
-      type="text"
+      className={`${styles.input} ${styles[size]}`}
+      type={type}
       placeholder={placeholder}
       onKeyPress={onKeyPress}
       onChange={onChange}
       value={value}
+      required={isRequired}
     />
   );
 };
@@ -31,6 +41,15 @@ Input.propTypes = {
     PropTypes.func, // for legacy refs
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
+  isRequired: PropTypes.bool,
+  type: PropTypes.oneOf(['text', 'password', 'email']),
+};
+
+Input.defaultProps = {
+  placeholder: '',
+  onPressEnter: null,
+  isRequired: false,
+  type: 'text',
 };
 
 export default Input;

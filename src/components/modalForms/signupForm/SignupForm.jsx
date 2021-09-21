@@ -1,11 +1,14 @@
 import React from 'react';
 import '../../../common/styles/modalForm.css';
 import useInput from '../../../hooks/useInput';
+import Button from '../../button/Button';
+import Input from '../../input/Input';
 const SignupForm = ({ signup, closeModal }) => {
   const [username, setUsernameByEvent, setUsernameByValue] = useInput('');
   const [email, setEmailByEvent, setEmailByValue] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
 
+  // Sign up logic
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(username, email, password)
@@ -26,38 +29,37 @@ const SignupForm = ({ signup, closeModal }) => {
         <h1 className="title">Sign Up</h1>
         <div className="inputSection">
           <label className="label">Username</label>
-          <input
-            value={username}
+          <Input
             onChange={setUsernameByEvent}
+            value={username}
+            isRequired={true}
+            size="small"
             type="text"
-            id="username"
-            className="input"
-            required
           />
         </div>
         <div className="inputSection">
           <label className="label">Email</label>
-          <input
-            value={email}
+          <Input
             onChange={setEmailByEvent}
+            value={email}
+            isRequired={true}
+            size="small"
             type="email"
-            id="email"
-            className="input"
-            required
           />
         </div>
         <div className="inputSection">
           <label className="label">Password</label>
-          <input
-            value={password}
+          <Input
             onChange={setPasswordByEvent}
+            value={password}
+            isRequired={true}
+            size="small"
             type="password"
-            id="password"
-            className="input"
-            required
           />
         </div>
-        <button className="button">Go</button>
+        <div className="btnWrapper">
+          <Button type="shine" size="small" label="Sign up" />
+        </div>
       </form>
     </div>
   );

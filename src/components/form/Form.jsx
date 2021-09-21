@@ -22,6 +22,8 @@ const Form = ({ addPost }) => {
         value={inputVal}
         onChange={setInputValByEvent}
         inputRef={inputRef}
+        size="medium"
+        type="text"
       />
       <div className={styles.btnWrapper}>
         <Button

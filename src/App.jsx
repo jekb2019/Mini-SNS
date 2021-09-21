@@ -101,6 +101,10 @@ function App({ postService, userService }) {
   };
 
   const addPost = async (content) => {
+    if (!user) {
+      alert('Log in before posting!');
+      return;
+    }
     // Add post to server
     const post = await postService.addPost(user.username, content);
     // Add post to UI

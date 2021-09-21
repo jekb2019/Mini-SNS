@@ -1,11 +1,14 @@
 import React, { useRef } from 'react';
 import '../../../common/styles/modalForm.css';
 import useInput from '../../../hooks/useInput';
+import Button from '../../button/Button';
+import Input from '../../input/Input';
 
 const LoginForm = ({ signin, closeModal }) => {
   const [username, setUsernameByEvent, setUsernameByValue] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
 
+  // Log in logic
   const handleSubmit = (e) => {
     e.preventDefault();
     signin(username, password)
@@ -24,27 +27,27 @@ const LoginForm = ({ signin, closeModal }) => {
         <h1 className="title">Log In</h1>
         <div className="inputSection">
           <label className="label">Username</label>
-          <input
-            value={username}
-            type="text"
-            id="username"
-            className="input"
+          <Input
             onChange={setUsernameByEvent}
-            required
+            value={username}
+            isRequired={true}
+            size="small"
+            type="email"
           />
         </div>
         <div className="inputSection">
           <label className="label">Password</label>
-          <input
-            value={password}
-            type="password"
-            id="password"
-            className="input"
+          <Input
             onChange={setPasswordByEvent}
-            required
+            value={password}
+            isRequired={true}
+            size="small"
+            type="password"
           />
         </div>
-        <button className="button">Go</button>
+        <div className="btnWrapper">
+          <Button type="shine" size="small" label="Log in" />
+        </div>
       </form>
     </div>
   );

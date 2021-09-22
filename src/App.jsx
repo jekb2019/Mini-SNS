@@ -81,11 +81,21 @@ function App({ postService, userService }) {
   };
 
   const deletePost = async (id) => {
+    // user validation
+    if (user === null) {
+      throw new Error('You need to login first.');
+    }
+
+    const targetPost = posts.find((post) => post.id === id);
+    if (targetPost.author !== user.username) {
+      throw new Error('Unauthorized to delete the post.');
+    }
+
     // Delete post from server
     try {
       await postService.deletePost(id);
     } catch (e) {
-      throw new Error(`Unable to delete post with id [${id}]`);
+      throw new Error(`Unable to delete the post`);
     }
     // Delete post in the component state (UI)
     setPosts((prevPosts) => {

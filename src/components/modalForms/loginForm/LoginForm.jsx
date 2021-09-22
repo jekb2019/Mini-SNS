@@ -1,24 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useContext } from 'react';
 import '../../../common/styles/modalForm.css';
+import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
 import Button from '../../button/Button';
 import Input from '../../input/Input';
+import submitForm from './submitLogic';
 
-const LoginForm = ({ signin, closeModal }) => {
-  const [username, setUsernameByEvent, setUsernameByValue] = useInput('');
+const LoginForm = ({ signin }) => {
+  const { closeModal } = useContext(ModalContext);
+
+  const [username, setUsernameByEvent] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
 
-  // Log in logic
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signin(username, password)
-      .then(() => {
-        closeModal();
-      })
-      .catch((e) => {
-        setPasswordByValue('');
-        alert('Failed to Log In. Please try again.');
-      });
+    const isSuccessful = await submitForm(signin, username, password);
+    if (isSuccessful) {
+      closeModal();
+    } else {
+      alert('Failed to Log In. Please try again.');
+      setPasswordByValue('');
+    }
   };
 
   return (
@@ -32,7 +34,6 @@ const LoginForm = ({ signin, closeModal }) => {
             value={username}
             isRequired={true}
             size="small"
-            type="email"
           />
         </div>
         <div className="inputSection">

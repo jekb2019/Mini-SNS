@@ -1,26 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../../common/styles/modalForm.css';
+import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
 import Button from '../../button/Button';
 import Input from '../../input/Input';
-const SignupForm = ({ signup, closeModal }) => {
-  const [username, setUsernameByEvent, setUsernameByValue] = useInput('');
-  const [email, setEmailByEvent, setEmailByValue] = useInput('');
+import submitForm from './submitLogic';
+
+const SignupForm = ({ signup, verifyUser }) => {
+  const { closeModal } = useContext(ModalContext);
+
+  const [username, setUsernameByEvent] = useInput('');
+  const [email, setEmailByEvent] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
 
-  // Sign up logic
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signup(username, email, password)
-      .then(() => {
-        closeModal();
-      })
-      .catch(() => {
+
+    // validations
+    try {
+      await submitForm(signup, username, email, password);
+    } catch (error) {
+      if (error.code === 'InvalidPasswordException') {
+        alert('Password must be at least 8 characters.');
         setPasswordByValue('');
-        alert(
-          'Problem signing up: user already exists or password less than 8 characters.'
-        );
-      });
+        return;
+      }
+      alert(error.message);
+      setPasswordByValue('');
+      return;
+    }
+
+    // user verification
+    const code = prompt('Enter verification code (Sent to your email)');
+    try {
+      await verifyUser(username, code);
+    } catch (error) {
+      alert(error.message);
+      return;
+    }
+    alert('Successfully signed up! Welcome to MINI SNS!');
+    closeModal();
   };
 
   return (
@@ -34,7 +53,6 @@ const SignupForm = ({ signup, closeModal }) => {
             value={username}
             isRequired={true}
             size="small"
-            type="text"
           />
         </div>
         <div className="inputSection">

@@ -10,8 +10,19 @@ const Form = ({ addPost }) => {
   const inputRef = useRef();
   const [inputVal, setInputValByEvent, setInputValByVal] = useInput('');
 
-  const handleSubmit = () => {
-    submitForm(inputVal, inputRef, addPost, setInputValByVal);
+  const handleSubmit = async () => {
+    if (inputVal === '') {
+      inputRef.current.focus();
+      return;
+    }
+    try {
+      await submitForm(inputVal, addPost);
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      inputRef.current.value = '';
+      setInputValByVal('');
+    }
   };
 
   return (
@@ -23,7 +34,6 @@ const Form = ({ addPost }) => {
         onChange={setInputValByEvent}
         inputRef={inputRef}
         size="medium"
-        type="text"
       />
       <div className={styles.btnWrapper}>
         <Button

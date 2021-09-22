@@ -6,11 +6,11 @@ export const filterCognitoUser = (cognitoUser) => {
   return { username, email };
 };
 
-export const verifyUser = async (userService, username, code) => {
-  try {
-    await userService.confirmSignup(username, code);
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
+// export const verifyUser = async (userService, username, code) => {
+//   try {
+//     await userService.confirmSignup(username, code);
+//     return true;
+//   } catch (error) {
+//     return false;
+//   }
+// };

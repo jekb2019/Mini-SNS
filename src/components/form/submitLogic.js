@@ -2,13 +2,11 @@
  * This function is the business logic for adding post on form submit.
  */
 
-const submitForm = async (inputVal, inputRef, addPost, setInputValByVal) => {
-  if (inputVal === '') {
-    inputRef.current.focus();
-  } else {
+const submitForm = async (inputVal, addPost) => {
+  try {
     await addPost(inputVal);
-    inputRef.current.value = '';
-    setInputValByVal('');
+  } catch (error) {
+    throw error;
   }
 };
 

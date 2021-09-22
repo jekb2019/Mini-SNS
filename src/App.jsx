@@ -4,7 +4,7 @@ import Form from './components/form/Form';
 import PostList from './components/postList/PostList';
 import { useEffect, useState } from 'react';
 import Modal from './components/modal/Modal';
-import { ModalTypeContext } from './context/ModalTypeContext';
+import { ModalContext } from './context/ModalContext';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import { filterCognitoUser, verifyUser } from './helpers/authHelper';
@@ -44,16 +44,19 @@ function App({ postService, userService }) {
       .catch(console.error);
   }, [userService]);
 
+  const closeModal = () => {
+    setShowModal(false);
+    setModalType(null);
+  };
+
+  const openModalType = (type) => {
+    setModalType(type);
+    setShowModal(true);
+  };
+
   const signup = async (username, email, password) => {
     try {
       await userService.signup(username, email, password);
-      const code = prompt('Enter verification code (Sent to your email)');
-      const isVerified = await verifyUser(userService, username, code);
-      if (isVerified) {
-        alert('Successfully signed up! Welcome to MINI SNS!');
-        return;
-      }
-      alert('Verification Failed');
     } catch (error) {
       throw error;
     }
@@ -77,16 +80,6 @@ function App({ postService, userService }) {
     }
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    setModalType(null);
-  };
-
-  const openModalType = (type) => {
-    setModalType(type);
-    setShowModal(true);
-  };
-
   const deletePost = async (id) => {
     // Delete post from server
     try {
@@ -102,8 +95,7 @@ function App({ postService, userService }) {
 
   const addPost = async (content) => {
     if (!user) {
-      alert('Log in before posting!');
-      return;
+      throw new Error('Not Authorized. Please Log in.');
     }
     // Add post to server
     const post = await postService.addPost(user.username, content);
@@ -123,14 +115,13 @@ function App({ postService, userService }) {
       <Form addPost={addPost} />
       <PostList posts={posts} onDelete={deletePost} />
       {showModal && (
-        <ModalTypeContext.Provider value={modalType}>
+        <ModalContext.Provider value={{ modalType, openModalType, closeModal }}>
           <Modal
+            verifyUser={userService.confirmSignup}
             signup={signup}
             signin={signin}
-            closeModal={closeModal}
-            openModalType={openModalType}
           />
-        </ModalTypeContext.Provider>
+        </ModalContext.Provider>
       )}
     </div>
   );

@@ -31,7 +31,9 @@ const PostList = ({ posts, onDelete }) => {
         })}
         <div ref={endRef}></div>
       </ul>
-      <Scroller scrollHandler={scrollToBottom} icon={scrollDownIcon} />
+      <div className={styles.scrollerWrapper}>
+        <Scroller scrollHandler={scrollToBottom} icon={scrollDownIcon} />
+      </div>
     </div>
   );
 };

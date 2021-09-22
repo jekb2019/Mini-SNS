@@ -4,7 +4,7 @@ import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
 import Button from '../../button/Button';
 import Input from '../../input/Input';
-import submitForm from './submitLogic';
+import submitForm from '../../../util/submitForm';
 
 const LoginForm = ({ signin }) => {
   const { closeModal } = useContext(ModalContext);
@@ -14,11 +14,11 @@ const LoginForm = ({ signin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isSuccessful = await submitForm(signin, username, password);
-    if (isSuccessful) {
+    try {
+      await submitForm(signin, username, password);
       closeModal();
-    } else {
-      alert('Failed to Log In. Please try again.');
+    } catch (error) {
+      alert(error.message);
       setPasswordByValue('');
     }
   };

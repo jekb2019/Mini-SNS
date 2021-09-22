@@ -4,7 +4,7 @@ import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
 import Button from '../../button/Button';
 import Input from '../../input/Input';
-import submitForm from './submitLogic';
+import submitForm from '../../../util/submitForm';
 
 const SignupForm = ({ signup, verifyUser }) => {
   const { closeModal } = useContext(ModalContext);

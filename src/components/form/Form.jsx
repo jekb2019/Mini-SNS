@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Input from '../input/Input';
 import Button from '../button/Button';
 import useInput from '../../hooks/useInput';
-import submitForm from './submitLogic';
+import submitForm from '../../util/submitForm';
 
 const Form = ({ addPost }) => {
   const inputRef = useRef();
@@ -16,7 +16,7 @@ const Form = ({ addPost }) => {
       return;
     }
     try {
-      await submitForm(inputVal, addPost);
+      await submitForm(addPost, inputVal);
     } catch (error) {
       alert(error.message);
     } finally {

@@ -7,7 +7,7 @@ import Modal from './components/modal/Modal';
 import { ModalContext } from './context/ModalContext';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
-import { filterCognitoUser, verifyUser } from './helpers/authHelper';
+import { filterCognitoUser } from './util/auth';
 
 Amplify.configure(awsconfig);
 

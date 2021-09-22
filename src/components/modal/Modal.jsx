@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { ModalTypeContext } from '../../context/ModalTypeContext';
+import { ModalContext } from '../../context/ModalContext';
 import LoginForm from '../modalForms/loginForm/LoginForm';
 import SignupForm from '../modalForms/signupForm/SignupForm';
 import styles from './Modal.module.css';
 import PropTypes from 'prop-types';
 
-const Modal = ({ signup, signin, closeModal, openModalType }) => {
-  const modalType = useContext(ModalTypeContext);
+const Modal = ({ signup, signin, verifyUser }) => {
+  const { modalType, openModalType, closeModal } = useContext(ModalContext);
 
   const switchModalType = () => {
     if (modalType === 'login') {
@@ -23,9 +23,13 @@ const Modal = ({ signup, signin, closeModal, openModalType }) => {
           X
         </p>
         {modalType === 'signup' ? (
-          <SignupForm signup={signup} closeModal={closeModal} />
+          <SignupForm
+            signup={signup}
+            closeModal={closeModal}
+            verifyUser={verifyUser}
+          />
         ) : (
-          <LoginForm signin={signin} closeModal={closeModal} />
+          <LoginForm signin={signin} />
         )}
         <p className={styles.link} onClick={switchModalType}>
           {modalType === 'signup' ? 'Log In' : 'Sign Up'}
@@ -36,8 +40,8 @@ const Modal = ({ signup, signin, closeModal, openModalType }) => {
 };
 
 Modal.propTypes = {
-  closeModal: PropTypes.func.isRequired,
-  openModalType: PropTypes.func.isRequired,
+  signin: PropTypes.func.isRequired,
+  signup: PropTypes.func.isRequired,
 };
 
 export default Modal;

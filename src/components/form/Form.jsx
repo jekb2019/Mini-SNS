@@ -4,14 +4,25 @@ import PropTypes from 'prop-types';
 import Input from '../input/Input';
 import Button from '../button/Button';
 import useInput from '../../hooks/useInput';
-import submitForm from './submitLogic';
+import submitForm from '../../util/submitForm';
 
 const Form = ({ addPost }) => {
   const inputRef = useRef();
   const [inputVal, setInputValByEvent, setInputValByVal] = useInput('');
 
-  const handleSubmit = () => {
-    submitForm(inputVal, inputRef, addPost, setInputValByVal);
+  const handleSubmit = async () => {
+    if (inputVal === '') {
+      inputRef.current.focus();
+      return;
+    }
+    try {
+      await submitForm(addPost, inputVal);
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      inputRef.current.value = '';
+      setInputValByVal('');
+    }
   };
 
   return (
@@ -23,7 +34,6 @@ const Form = ({ addPost }) => {
         onChange={setInputValByEvent}
         inputRef={inputRef}
         size="medium"
-        type="text"
       />
       <div className={styles.btnWrapper}>
         <Button

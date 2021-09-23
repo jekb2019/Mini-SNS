@@ -28,22 +28,28 @@ const LoginForm = ({ signin }) => {
       <form className="form" onSubmit={handleSubmit}>
         <h1 className="title">Log In</h1>
         <div className="inputSection">
-          <label className="label">Username</label>
+          <label className="label" htmlFor="loginUsernameInput">
+            Username
+          </label>
           <Input
             onChange={setUsernameByEvent}
             value={username}
             isRequired={true}
             size="small"
+            inputId="loginUsernameInput"
           />
         </div>
         <div className="inputSection">
-          <label className="label">Password</label>
+          <label className="label" htmlFor="loginPasswordInput">
+            Password
+          </label>
           <Input
             onChange={setPasswordByEvent}
             value={password}
             isRequired={true}
             size="small"
             type="password"
+            inputId="loginPasswordInput"
           />
         </div>
         <div className="btnWrapper">

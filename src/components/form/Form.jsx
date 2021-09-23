@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { memo, useRef } from 'react';
 import styles from './Form.module.css';
 import PropTypes from 'prop-types';
 import Input from '../input/Input';

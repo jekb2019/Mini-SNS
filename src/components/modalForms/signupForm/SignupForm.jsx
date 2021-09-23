@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import '../../../common/styles/modalForm.css';
 import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
@@ -12,6 +12,12 @@ const SignupForm = ({ signup, verifyUser }) => {
   const [username, setUsernameByEvent] = useInput('');
   const [email, setEmailByEvent] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
+
+  const usernameInputRef = useRef();
+
+  useEffect(() => {
+    usernameInputRef.current.focus();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,6 +62,7 @@ const SignupForm = ({ signup, verifyUser }) => {
             isRequired={true}
             size="small"
             inputId="signupUsernameInput"
+            inputRef={usernameInputRef}
           />
         </div>
         <div className="inputSection">

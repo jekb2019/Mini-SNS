@@ -6,7 +6,6 @@ import Modal from '../modal/Modal';
 import useModal from './useModal';
 
 const UserUIWrapper = ({ verifyUser, signup, signin, signout, user }) => {
-  console.log(user);
   const [isModalOpen, modalType, openModalType, closeModal] = useModal(
     null,
     null

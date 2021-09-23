@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import '../../../common/styles/modalForm.css';
 import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
@@ -12,6 +13,12 @@ const SignupForm = ({ signup, verifyUser }) => {
   const [username, setUsernameByEvent] = useInput('');
   const [email, setEmailByEvent] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
+
+  const usernameInputRef = useRef();
+
+  useEffect(() => {
+    usernameInputRef.current.focus();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,32 +54,42 @@ const SignupForm = ({ signup, verifyUser }) => {
       <form className="form" onSubmit={handleSubmit}>
         <h1 className="title">Sign Up</h1>
         <div className="inputSection">
-          <label className="label">Username</label>
+          <label className="label" htmlFor="signupUsernameInput">
+            Username
+          </label>
           <Input
             onChange={setUsernameByEvent}
             value={username}
             isRequired={true}
             size="small"
+            inputId="signupUsernameInput"
+            inputRef={usernameInputRef}
           />
         </div>
         <div className="inputSection">
-          <label className="label">Email</label>
+          <label className="label" htmlFor="signupEmailInput">
+            Email
+          </label>
           <Input
             onChange={setEmailByEvent}
             value={email}
             isRequired={true}
             size="small"
             type="email"
+            inputId="signupEmailInput"
           />
         </div>
         <div className="inputSection">
-          <label className="label">Password</label>
+          <label className="label" htmlFor="signupPasswordInput">
+            Password
+          </label>
           <Input
             onChange={setPasswordByEvent}
             value={password}
             isRequired={true}
             size="small"
             type="password"
+            inputId="signupPasswordInput"
           />
         </div>
         <div className="btnWrapper">
@@ -81,6 +98,11 @@ const SignupForm = ({ signup, verifyUser }) => {
       </form>
     </div>
   );
+};
+
+SignupForm.propTypes = {
+  signup: PropTypes.func.isRequired,
+  verifyUser: PropTypes.func.isRequired,
 };
 
 export default SignupForm;

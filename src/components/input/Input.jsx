@@ -11,6 +11,7 @@ const Input = ({
   isRequired,
   size,
   type,
+  inputId,
 }) => {
   const onKeyPress = (e) => {
     if (e.code === 'Enter' && onPressEnter !== null) {
@@ -28,6 +29,7 @@ const Input = ({
       onChange={onChange}
       value={value}
       required={isRequired}
+      id={inputId}
     />
   );
 };
@@ -43,6 +45,7 @@ Input.propTypes = {
   ]),
   isRequired: PropTypes.bool,
   type: PropTypes.oneOf(['text', 'password', 'email']),
+  inputId: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -50,6 +53,7 @@ Input.defaultProps = {
   onPressEnter: null,
   isRequired: false,
   type: 'text',
+  inputId: null,
 };
 
 export default Input;

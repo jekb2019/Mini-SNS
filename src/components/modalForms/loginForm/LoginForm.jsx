@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import '../../../common/styles/modalForm.css';
 import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
@@ -11,6 +12,12 @@ const LoginForm = ({ signin }) => {
 
   const [username, setUsernameByEvent] = useInput('');
   const [password, setPasswordByEvent, setPasswordByValue] = useInput('');
+
+  const usernameInputRef = useRef();
+
+  useEffect(() => {
+    usernameInputRef.current.focus();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,22 +35,29 @@ const LoginForm = ({ signin }) => {
       <form className="form" onSubmit={handleSubmit}>
         <h1 className="title">Log In</h1>
         <div className="inputSection">
-          <label className="label">Username</label>
+          <label className="label" htmlFor="loginUsernameInput">
+            Username
+          </label>
           <Input
             onChange={setUsernameByEvent}
             value={username}
             isRequired={true}
             size="small"
+            inputId="loginUsernameInput"
+            inputRef={usernameInputRef}
           />
         </div>
         <div className="inputSection">
-          <label className="label">Password</label>
+          <label className="label" htmlFor="loginPasswordInput">
+            Password
+          </label>
           <Input
             onChange={setPasswordByEvent}
             value={password}
             isRequired={true}
             size="small"
             type="password"
+            inputId="loginPasswordInput"
           />
         </div>
         <div className="btnWrapper">
@@ -52,6 +66,10 @@ const LoginForm = ({ signin }) => {
       </form>
     </div>
   );
+};
+
+LoginForm.propTypes = {
+  signin: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

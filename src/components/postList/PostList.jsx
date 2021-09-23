@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import Post from '../post/Post';
 import styles from './PostList.module.css';
-import PropTypes from 'prop-types';
 import Scroller from '../scroller/Scroller';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -39,7 +39,13 @@ const PostList = ({ posts, onDelete }) => {
 };
 
 PostList.propTypes = {
-  posts: PropTypes.array.isRequired,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      content: PropTypes.string,
+      author: PropTypes.string,
+    })
+  ).isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 

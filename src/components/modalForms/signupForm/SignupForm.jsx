@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import '../../../common/styles/modalForm.css';
 import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
@@ -97,6 +98,11 @@ const SignupForm = ({ signup, verifyUser }) => {
       </form>
     </div>
   );
+};
+
+SignupForm.propTypes = {
+  signup: PropTypes.func.isRequired,
+  verifyUser: PropTypes.func.isRequired,
 };
 
 export default SignupForm;

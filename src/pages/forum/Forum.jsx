@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Board from '../../components/board/Board';
 
 /**
@@ -55,6 +56,13 @@ const Forum = ({ user, postService }) => {
   };
 
   return <Board posts={posts} addPost={addPost} deletePost={deletePost} />;
+};
+
+Forum.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string,
+    email: PropTypes.string,
+  }),
 };
 
 export default Forum;

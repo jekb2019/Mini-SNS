@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import '../../../common/styles/modalForm.css';
 import { ModalContext } from '../../../context/ModalContext';
 import useInput from '../../../hooks/useInput';
@@ -65,6 +66,10 @@ const LoginForm = ({ signin }) => {
       </form>
     </div>
   );
+};
+
+LoginForm.propTypes = {
+  signin: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

@@ -1,8 +1,5 @@
 import styles from './App.module.css';
-import Header from './components/header/Header';
 import { useEffect, useState } from 'react';
-import Modal from './components/modal/Modal';
-import { ModalContext } from './context/ModalContext';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
 import { filterCognitoUser } from './util/auth';
@@ -15,7 +12,7 @@ function App({ postService, userService }) {
   const [user, setUser] = useState(null);
 
   /**
-   * Get current user from AWS Cognito (App.jsx)
+   * Get current user from AWS Cognito
    */
   useEffect(() => {
     const getUserInfo = () => {
@@ -33,7 +30,6 @@ function App({ postService, userService }) {
     getUserInfo();
   }, [userService]);
 
-  // App.jsx
   const signup = async (username, email, password) => {
     try {
       await userService.signup(username, email, password);
@@ -42,7 +38,6 @@ function App({ postService, userService }) {
     }
   };
 
-  // App.jsx
   const signin = async (username, password) => {
     try {
       const user = await userService.login(username, password);
@@ -52,7 +47,6 @@ function App({ postService, userService }) {
     }
   };
 
-  // App.jsx
   const signout = async () => {
     try {
       userService.signout();

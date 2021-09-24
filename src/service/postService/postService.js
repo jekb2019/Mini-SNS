@@ -1,54 +1,98 @@
-const mockPosts = [
-  {
-    id: '1',
-    content: 'How much does it cost to do something like this',
-    author: 'jason123',
-  },
-  {
-    id: '2',
-    content: 'I will drill a hole there',
-    author: 'jason123',
-  },
-  {
-    id: '3',
-    content: 'Amazing things happens at night',
-    author: 'jason123',
-  },
-  { id: '4', content: 'Whoooooooooooo?', author: 'jason123' },
-];
+import API from '@aws-amplify/api';
+import { listPosts } from '../../graphql/queries';
+import {
+  createPost as createPostMutation,
+  deletePost as deletePostMutation,
+} from '../../graphql/mutations';
 
 class PostService {
-  constructor(defaultPosts) {
-    if (!defaultPosts) {
-      this.posts = mockPosts;
-    } else {
-      this.posts = defaultPosts;
+  /**
+   * Returns sorted (Date) post list fetched from server.
+   */
+  async fetchPosts() {
+    let apiData;
+    try {
+      apiData = await API.graphql({ query: listPosts });
+    } catch (error) {
+      throw new Error('Unable to fetch posts.');
     }
-  }
-
-  async getPosts() {
-    return this.posts;
+    const fetchedPosts = this.processPostListAPIData(apiData);
+    return fetchedPosts;
   }
 
   /**
-   * it should throw error if deleting post is not successful
+   * Sorts the posts by created Date (most recent one at the start)
+   */
+  sortPostsByDate(posts) {
+    posts.sort(function (a, b) {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+  }
+
+  /**
+   * Sorts the post list api data.
+   * Pull out only needed attributes of fetched posts (id, author, content).
+   */
+  processPostListAPIData(apiData) {
+    const items = apiData.data.listPosts.items;
+    this.sortPostsByDate(items);
+
+    const fetchedPosts = items.map((item) => {
+      const { id, author, content } = item;
+      return { id, author, content };
+    });
+    return fetchedPosts;
+  }
+
+  /**
+   * Pull out only needed attributes of post api data - (id, author, content).
+   */
+  processPostAPIData(apiData, query) {
+    const { id, author, content } = apiData.data[query];
+    return { id, author, content };
+  }
+
+  /**
+   * it should throw error if deleting post is not successful.
+   * If successful, it returns the deleted post.
    */
   async deletePost(id) {
-    this.posts = this.posts.filter((post) => post.id !== id);
-    return this.posts;
+    let apiData;
+    try {
+      apiData = await API.graphql({
+        query: deletePostMutation,
+        variables: { input: { id } },
+      });
+    } catch (error) {
+      throw new Error('Unable to delete post.');
+    }
+
+    const deletedPost = this.processPostAPIData(apiData, 'deletePost');
+    console.log(deletedPost);
+    return deletedPost;
   }
 
   /**
-   * It should throw error if adding post is not successful
+   * It should throw error if adding post is not successful.
+   * If successful, it returns the created post.
    */
   async addPost(author, content) {
-    const post = {
-      id: Date.now().toString(),
-      content,
-      author,
-    };
-    this.posts = [post, ...this.posts];
-    return post;
+    let apiData;
+    try {
+      apiData = await API.graphql({
+        query: createPostMutation,
+        variables: {
+          input: {
+            id: Date.now().toString(),
+            content,
+            author,
+          },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+    return this.processPostAPIData(apiData, 'createPost');
   }
 }
 

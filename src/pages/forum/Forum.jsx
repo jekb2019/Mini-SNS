@@ -9,7 +9,7 @@ const Forum = ({ user, postService }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    postService.getPosts().then((posts) => setPosts(posts));
+    postService.fetchPosts().then((posts) => setPosts(posts));
     // return () => {
     //   cleanup
     // }
@@ -33,7 +33,7 @@ const Forum = ({ user, postService }) => {
   };
 
   const deletePost = async (id) => {
-    let processedPost;
+    let deletedPost;
     // user validations
     if (user === null) {
       throw new Error('You need to Log in first.');
@@ -46,13 +46,15 @@ const Forum = ({ user, postService }) => {
 
     // Delete post from server
     try {
-      processedPost = await postService.deletePost(id);
+      deletedPost = await postService.deletePost(id);
     } catch (error) {
       throw new Error(`Unable to delete the post`);
     }
 
     // Delete post in the component state (UI)
-    setPosts(processedPost);
+    setPosts((prevPosts) => {
+      return prevPosts.filter((post) => post.id !== deletedPost.id);
+    });
   };
 
   return <Board posts={posts} addPost={addPost} deletePost={deletePost} />;

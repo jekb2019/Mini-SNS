@@ -6,8 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import PostService from './service/postService/postService';
 import UserService from './service/userService/userService';
 
-const postService = new PostService();
 const userService = new UserService();
+const postService = new PostService();
 
 ReactDOM.render(
   // <React.StrictMode>

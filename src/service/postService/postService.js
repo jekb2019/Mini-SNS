@@ -1,9 +1,11 @@
 import API from '@aws-amplify/api';
+import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { listPosts } from '../../graphql/queries';
 import {
   createPost as createPostMutation,
   deletePost as deletePostMutation,
 } from '../../graphql/mutations';
+import { onCreatePost } from '../../graphql/subscriptions';
 
 class PostService {
   /**
@@ -68,7 +70,6 @@ class PostService {
     }
 
     const deletedPost = this.processPostAPIData(apiData, 'deletePost');
-    console.log(deletedPost);
     return deletedPost;
   }
 
@@ -93,6 +94,18 @@ class PostService {
       throw error;
     }
     return this.processPostAPIData(apiData, 'createPost');
+  }
+
+  subscribeOnCreatePost(callback) {
+    const subscription = API.graphql(graphqlOperation(onCreatePost)).subscribe({
+      next: (postData) => {
+        const apiData = postData.value;
+        const newPost = this.processPostAPIData(apiData, 'onCreatePost');
+        callback(newPost);
+      },
+      error: (error) => console.warn(error),
+    });
+    return subscription;
   }
 }
 

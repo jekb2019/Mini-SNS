@@ -16,6 +16,21 @@ const Forum = ({ user, postService }) => {
   }, [postService]);
 
   /**
+   * Subscribe to onCreatePost
+   */
+  useEffect(() => {
+    const subscription = postService.subscribeOnCreatePost((newPost) => {
+      setPosts((prevPosts) => {
+        const tempPosts = prevPosts.filter((post) => post.id !== newPost.id);
+        return [newPost, ...tempPosts];
+      });
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  /**
    * Adds the post to the server and only update the UI if it is successful
    */
 

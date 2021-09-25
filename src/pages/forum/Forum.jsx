@@ -10,9 +10,6 @@ const Forum = ({ user, postService }) => {
 
   useEffect(() => {
     postService.fetchPosts().then((posts) => setPosts(posts));
-    // return () => {
-    //   cleanup
-    // }
   }, [postService]);
 
   /**
@@ -24,6 +21,20 @@ const Forum = ({ user, postService }) => {
         const tempPosts = prevPosts.filter((post) => post.id !== newPost.id);
         return [newPost, ...tempPosts];
       });
+    });
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  /**
+   * Subscribe to onDeletePost
+   */
+  useEffect(() => {
+    const subscription = postService.subscribeOnDeletePost((deletedPost) => {
+      setPosts((prevPosts) =>
+        prevPosts.filter((post) => post.id !== deletedPost.id)
+      );
     });
     return () => {
       subscription.unsubscribe();

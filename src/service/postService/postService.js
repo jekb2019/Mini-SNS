@@ -5,7 +5,7 @@ import {
   createPost as createPostMutation,
   deletePost as deletePostMutation,
 } from '../../graphql/mutations';
-import { onCreatePost } from '../../graphql/subscriptions';
+import { onCreatePost, onDeletePost } from '../../graphql/subscriptions';
 
 class PostService {
   /**
@@ -102,6 +102,18 @@ class PostService {
         const apiData = postData.value;
         const newPost = this.processPostAPIData(apiData, 'onCreatePost');
         callback(newPost);
+      },
+      error: (error) => console.warn(error),
+    });
+    return subscription;
+  }
+
+  subscribeOnDeletePost(callback) {
+    const subscription = API.graphql(graphqlOperation(onDeletePost)).subscribe({
+      next: (postData) => {
+        const apiData = postData.value;
+        const deletedPost = this.processPostAPIData(apiData, 'onDeletePost');
+        callback(deletedPost);
       },
       error: (error) => console.warn(error),
     });

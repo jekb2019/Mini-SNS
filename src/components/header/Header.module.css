@@ -38,3 +38,15 @@
     right: 10px;
   }
 }
+
+@media only screen and (max-width: 430px) {
+  .title {
+    font-size: 15px;
+  }
+  .greeting {
+    color: white;
+    position: absolute;
+    left: 20px;
+    font-size: 13px;
+  }
+}

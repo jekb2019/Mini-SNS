@@ -18,3 +18,9 @@
     width: 400px;
   }
 }
+
+@media only screen and (max-width: 430px) {
+  .app {
+    width: 350px;
+  }
+}

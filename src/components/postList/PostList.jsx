@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { memo, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Post from '../post/Post';
 import styles from './PostList.module.css';
@@ -6,13 +6,13 @@ import Scroller from '../scroller/Scroller';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
+const scrollDownIcon = <FontAwesomeIcon icon={faArrowDown} />;
+
 const PostList = ({ posts, onDelete }) => {
   const endRef = useRef();
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     endRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const scrollDownIcon = <FontAwesomeIcon icon={faArrowDown} />;
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -49,4 +49,4 @@ PostList.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-export default PostList;
+export default memo(PostList);

@@ -14,9 +14,9 @@ const userService = new UserService();
 const postService = new PostService();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App postService={postService} userService={userService} />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <App postService={postService} userService={userService} />,
+  //</React.StrictMode>,
   document.getElementById('root')
 );
 

@@ -31,9 +31,11 @@ const LoginForm = ({ signin }) => {
   };
 
   return (
-    <div>
+    <div data-testId="loginForm">
       <form className="form" onSubmit={handleSubmit}>
-        <h1 className="title">Log In</h1>
+        <h1 className="title" data-testId="formTitle">
+          Log In
+        </h1>
         <div className="inputSection">
           <label className="label" htmlFor="loginUsernameInput">
             Username
@@ -60,7 +62,7 @@ const LoginForm = ({ signin }) => {
             inputId="loginPasswordInput"
           />
         </div>
-        <div className="btnWrapper">
+        <div className="btnWrapper" data-testId="loginBtn">
           <Button type="shine" size="small" label="Log in" />
         </div>
       </form>

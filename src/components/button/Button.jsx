@@ -6,6 +6,7 @@ const Button = ({ type, size, label, onClick }) => (
   <button
     className={`${styles.btn} ${styles[type]} ${styles[size]}`}
     onClick={onClick}
+    data-testId="button"
   >
     {label}
   </button>

@@ -26,7 +26,7 @@ const Form = ({ addPost }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testId="addPostForm">
       <Input
         placeholder="Lemme know smth 🥸"
         onPressEnter={handleSubmit}

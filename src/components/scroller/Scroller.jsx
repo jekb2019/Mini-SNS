@@ -4,7 +4,11 @@ import styles from './Scroller.module.css';
 
 const Scroller = memo(({ scrollHandler, icon }) => {
   return (
-    <button className={styles.btn} onClick={scrollHandler}>
+    <button
+      className={styles.btn}
+      onClick={scrollHandler}
+      data-testId="scroller"
+    >
       {icon}
     </button>
   );

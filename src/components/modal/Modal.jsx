@@ -17,9 +17,13 @@ const Modal = ({ signup, signin, verifyUser }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testId="modal">
       <section className={styles.modal}>
-        <p onClick={closeModal} className={styles.close}>
+        <p
+          onClick={closeModal}
+          className={styles.close}
+          data-testId="closeModal"
+        >
           X
         </p>
         {modalType === 'signup' ? (
@@ -31,7 +35,11 @@ const Modal = ({ signup, signin, verifyUser }) => {
         ) : (
           <LoginForm signin={signin} />
         )}
-        <p className={styles.link} onClick={switchModalType}>
+        <p
+          className={styles.link}
+          onClick={switchModalType}
+          data-testId="switchModal"
+        >
           {modalType === 'signup' ? 'Log In' : 'Sign Up'}
         </p>
       </section>

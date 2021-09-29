@@ -16,7 +16,7 @@ const PostList = ({ posts, onDelete }) => {
 
   return (
     <div className={styles.wrapper}>
-      <ul className={styles.list} data-testId="postList">
+      <ul className={styles.list} data-testid="postList">
         {posts.map((post) => {
           const { id, content, author } = post;
           return (

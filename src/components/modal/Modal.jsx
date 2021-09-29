@@ -17,12 +17,12 @@ const Modal = ({ signup, signin, verifyUser }) => {
   };
 
   return (
-    <div className={styles.wrapper} data-testId="modal">
+    <div className={styles.wrapper} data-testid="modal">
       <section className={styles.modal}>
         <p
           onClick={closeModal}
           className={styles.close}
-          data-testId="closeModal"
+          data-testid="closeModal"
         >
           X
         </p>
@@ -38,7 +38,7 @@ const Modal = ({ signup, signin, verifyUser }) => {
         <p
           className={styles.link}
           onClick={switchModalType}
-          data-testId="switchModal"
+          data-testid="switchModal"
         >
           {modalType === 'signup' ? 'Log In' : 'Sign Up'}
         </p>

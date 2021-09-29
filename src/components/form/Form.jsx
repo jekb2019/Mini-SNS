@@ -1,4 +1,4 @@
-import React, { memo, useRef } from 'react';
+import React, { useRef } from 'react';
 import styles from './Form.module.css';
 import PropTypes from 'prop-types';
 import Input from '../input/Input';
@@ -26,7 +26,7 @@ const Form = ({ addPost }) => {
   };
 
   return (
-    <div className={styles.wrapper} data-testId="addPostForm">
+    <div className={styles.wrapper} data-testid="addPostForm">
       <Input
         placeholder="Lemme know smth 🥸"
         onPressEnter={handleSubmit}

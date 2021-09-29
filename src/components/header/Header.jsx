@@ -7,17 +7,22 @@ import Button from '../button/Button';
  * Return Button component with given label and onClick handler
  */
 const displayButton = (label, onClick) => (
-  <div className={styles.btnWrapper} data-testId="authBtn">
+  <div className={styles.btnWrapper} data-testid="authBtn">
     <Button type="shine" size="small" label={label} onClick={onClick} />
   </div>
 );
 
 const Header = ({ login, logout, username }) => (
   <header className={styles.wrapper}>
-    <h1 className={styles.title} data-testId="headerTitle">
+    <h1 className={styles.title} data-testid="headerTitle">
       MINI SNS
     </h1>
-    {username && <p className={styles.greeting}>{`Hi ${username}`}</p>}
+    {username && (
+      <p
+        className={styles.greeting}
+        data-testid="greeting"
+      >{`Hi ${username}`}</p>
+    )}
     {username
       ? displayButton('Log out', logout)
       : displayButton('Log in', login)}

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import Form from '../form/Form';
 import PostList from '../postList/PostList';
 import PropTypes from 'prop-types';

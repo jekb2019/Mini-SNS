@@ -30,7 +30,7 @@ const Input = ({
       value={value}
       required={isRequired}
       id={inputId}
-      data-testId="input"
+      data-testid="input"
     />
   );
 };

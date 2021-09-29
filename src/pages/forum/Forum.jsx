@@ -25,7 +25,7 @@ const Forum = ({ user, postService }) => {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [postService]);
 
   /**
    * Subscribe to onDeletePost
@@ -39,7 +39,7 @@ const Forum = ({ user, postService }) => {
     return () => {
       subscription.unsubscribe();
     };
-  }, []);
+  }, [postService]);
 
   /**
    * Adds the post to the server and only update the UI if it is successful

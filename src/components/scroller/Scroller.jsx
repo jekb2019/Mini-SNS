@@ -7,7 +7,7 @@ const Scroller = memo(({ scrollHandler, icon }) => {
     <button
       className={styles.btn}
       onClick={scrollHandler}
-      data-testId="scroller"
+      data-testid="scroller"
     >
       {icon}
     </button>

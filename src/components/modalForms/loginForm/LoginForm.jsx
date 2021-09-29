@@ -31,9 +31,9 @@ const LoginForm = ({ signin }) => {
   };
 
   return (
-    <div data-testId="loginForm">
+    <div data-testid="loginForm">
       <form className="form" onSubmit={handleSubmit}>
-        <h1 className="title" data-testId="formTitle">
+        <h1 className="title" data-testid="formTitle">
           Log In
         </h1>
         <div className="inputSection">
@@ -62,7 +62,7 @@ const LoginForm = ({ signin }) => {
             inputId="loginPasswordInput"
           />
         </div>
-        <div className="btnWrapper" data-testId="loginBtn">
+        <div className="btnWrapper" data-testid="loginBtn">
           <Button type="shine" size="small" label="Log in" />
         </div>
       </form>

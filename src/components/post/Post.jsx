@@ -13,14 +13,14 @@ const Post = ({ id, content, createdBy, onDelete }) => {
   };
 
   return (
-    <li className={styles.card} data-testId="post">
-      <p className={styles.content} data-testId="content">
+    <li className={styles.card} data-testid="post">
+      <p className={styles.content} data-testid="content">
         {content}
       </p>
-      <p className={styles.createdBy} data-testId="createdBy">
+      <p className={styles.createdBy} data-testid="createdBy">
         Created by: {createdBy}
       </p>
-      <div className={styles.btnWrapper}>
+      <div className={styles.btnWrapper} data-testid="deleteBtnWrapper">
         <Button
           type="bounce"
           size="small"

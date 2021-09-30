@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Mini SNS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Mini SNS is a simple twitter-like forum where you can post, delete your thoughts and share it with everyone.
 
-## Available Scripts
+# Demo
 
-In the project directory, you can run:
+Here is a short demo GIF for you!
 
-### `yarn start`
+# Responsiveness
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Mini SNS is responsive enough to support both Desktop and Mobile! It is not a big deal but I just wanted to show you because the laptop and mobile wireframe kinda looked cool.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Desktop
 
-### `yarn test`
+## Mobile
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# How To Use
 
-### `yarn build`
+The user interface of Mini SNS focuses on intiotiveness so that no user manual is necessary for the new users. However, here are some basic user namual to be even more clearer!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Forum
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+When you first visit Mini SNS, you will see the posts that is already uploaded by other people.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Sign Up
 
-### `yarn eject`
+Obviously, the first thing we need to do is sign up. Let's sign up and fully utilize the Mini SNS app! Click the "LOG IN" button in the upper right corner.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+When the login modal appears, click "SIGN UP" link at the bottom of the modal to switch to signup modal.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Fill in all the details specified. Remember, your password cannot be less than 8 characters for the security reason! Also, your email should be valid as we will be sending a verification code for you to complete the signup process.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+When you are done, click the "SIGN UP" button and check your inbox. Shortly, you will receive a verification code. Simply insert that into the prompt box.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Log In
 
-## Learn More
+As you are now signed up, it's time to log in. Otherwise you won't be able to upload a new post!!
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Following the similar process, let's click "LOG IN" button to open up the modal and log in!
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you are successfully logged in, you will see "Hi your name" on the top left of the app.
 
-### Code Splitting
+## Upload a post
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+In the input box, share your thought and simply hit enter or click "POST" button. (btw, if you submit an empty content, it will refuse to add a post for you!).
 
-### Analyzing the Bundle Size
+Do you see your post just have been appeared?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Delete a post
 
-### Making a Progressive Web App
+If you change your mind, you can simply hit "DELETE" button to remove the post that you uploaded.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Keep in mind that you CANNOT delete other people's posts! (It will probably hurt their feeling if you do so :0)
 
-### Advanced Configuration
+## Scroll down
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+If the forum is overflowing and you don't want to scroll down infinitely, just click the scroller and let it do it for you.
 
-### Deployment
+# Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Mini SNS is built with the following technologies:
 
-### `yarn build` fails to minify
+- React.js
+- AWS Amplify
+- AWS AppSync
+- AWS Cognito
+- AWS DynamoDB
+- Storybook
+- Cypress
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Um...
+
+I wish I could show you the URL to access Mini SNS but since I am using AWS free tier, I was a bit scared because I might get charged tonnes of money if you overload the forum with thousands of posts.
